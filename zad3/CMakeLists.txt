@@ -3,4 +3,4 @@ project(zad3)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(zad3 main.cpp brudnopis.h)
+add_executable(zad3 main.cpp brudnopis.h dodaktowe_testy.h)

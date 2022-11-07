@@ -129,3 +129,55 @@ cout << sum;*/
     return vec;
 }
  */
+
+/*{vector<int> next_solution_test(solved_Puzzle_t &puzzle) {
+    int i = 0;
+    for (; i < puzzle.board.size(); i++) {
+
+        //puzzle.board[i] = (rand()%2);
+
+        if (puzzle.board[i] == 0) {
+            puzzle.board[i] = 1;
+            break;
+        } else if (puzzle.board[i-1] == 1) {
+            puzzle.board[i] = 0;
+        }
+    }
+    for(int i = 0; i < puzzle.board.size(); i++){
+        //cout << puzzle.board[i];
+    }
+
+    return (i != puzzle.board.size());
+}*/
+
+/*int n = 0;
+    while (next_solution(test)) {
+        if ((n % 1) == 0) {
+            if(evaluate(test)<2) {
+                //cout << n << " : " << evaluate(test) << endl << test << endl;
+            }
+        }
+        if (evaluate(test) == 0) {
+            //cout << n << " : " << evaluate(test) << endl << test << endl;
+            break;
+        }
+        n++;
+    }*/
+
+/*
+ * bool next_solution(solved_Puzzle_t &puzzle) {
+    int i = 0;
+    for (; i < puzzle.board.size(); i++) {
+        if (puzzle.board[i] == 0) {
+            puzzle.board[i] = 1;
+            break;
+        } else if (puzzle.board[i-1] == 1) {
+            puzzle.board[i] = 0;
+        }
+    }
+    for(int i = 0; i < puzzle.board.size(); i++){
+    }
+
+    return (i != puzzle.board.size());
+}
+ */

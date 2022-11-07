@@ -2,17 +2,11 @@
 #include <vector>
 #include <random>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
-struct puzzle_t{
-    int size; //Musi być jeden wspólny rozmiar
-    vector<vector<int>>  row_lines; // pozioma linia decyzyjna o zaznaczeniu
-    vector<vector<int>> column_lines; // pionowa linia decyzyjna o zaznaczeniu
-};
-
 struct solved_Puzzle_t{
-
     int size; //rozmiar w pionie i poziomie
     vector<vector<int>>  row_lines; // pozioma linia decyzyjna o zaznaczeniu
     vector<vector<int>> column_lines; // pionowa linia decyzyjna o zaznaczeniu
@@ -162,19 +156,6 @@ solved_Puzzle_t brute_force(solved_Puzzle_t &test){
     }
 }
 
-/*
-std::vector<solved_Puzzle_t> generate_neighbours(const puzzle_t &p) {
-    std::vector<puzzle_t> neighbours;
-    for (int i = 0; i < p.board.size(); i++) {
-        if (p.board[i] <= 0) {
-            auto new_board = p;
-            new_board.board[i] = -1 - new_board.board[i];
-            neighbours.push_back(new_board);
-        }
-    }
-    return neighbours;
-}*/
-
 solved_Puzzle_t generate_random_solution(const solved_Puzzle_t &p) {
     using namespace  std;
     static random_device rd;
@@ -182,61 +163,187 @@ solved_Puzzle_t generate_random_solution(const solved_Puzzle_t &p) {
     uniform_int_distribution<int> distr(0,1);
     solved_Puzzle_t rand_sol = p;
     for (int i = 0; i < p.board.size(); i++) {
-        if (p.board[i] <= 0) {
+        if (p.board[i] <= 1) {
             auto new_board = p;
             rand_sol.board[i] = distr(mt);
         }
     }
     return rand_sol;
 }
-/*
-puzzle_t hill_climb_det(puzzle_t puzzle, int iterations) {
-}
-*/
 
-solved_Puzzle_t random_solution(solved_Puzzle_t &test) {
+solved_Puzzle_t random_solution(solved_Puzzle_t &test, int iters) {
     int n = 0;
-    for(int i = 0; i <10000; i++){
+    for(int i = 0; i <iters; i++){
         test = generate_random_solution(test);
         if ((n % 1) == 0) {
             if (evaluate(test) < test.size * test.size) {
-            cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
+                cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
+            }
         }
-    }
-    if (evaluate(test) == 0) {
-        break;
-    }
-    n++;
+        if (evaluate(test) == 0) {
+            break;
+        }
+        n++;
     }
 }
 
-int main() {
+vector<solved_Puzzle_t> generate_neighbours( solved_Puzzle_t &p) {
+    vector<solved_Puzzle_t> neighbours;
+    for (int i = 1; i < p.board.size()-1; i++) {
+        if (p.board[i] = 1) {
+            auto new_board = p;
+            new_board.board[i-1] = 1;
+            neighbours.push_back(new_board);
+            new_board.board[i-1] = 0;
+            new_board.board[i+1] = 1;
+            neighbours.push_back(new_board);
+        } else if(p.board[i] = 0){
+            auto new_board = p;
+            new_board.board[i] = 1;
+            neighbours.push_back(new_board);
+        }
+    }
+    return neighbours;
+}
+
+solved_Puzzle_t generate_neighbours_solution(solved_Puzzle_t &p){
+    auto new_puzzle = p;
+    for(auto neighbour: generate_neighbours(p)){
+        if(count_incorrect_lines(neighbour) < count_incorrect_lines(p)){
+            new_puzzle = neighbour;
+            break;
+        }
+    }
+    return new_puzzle;
+};
+
+solved_Puzzle_t generate_random_neighbours_solution(solved_Puzzle_t &p){
+    auto new_puzzle = p;
+    for(auto neighbour: generate_neighbours(p)){
+            new_puzzle = neighbour;
+    }
+    return new_puzzle;
+};
+
+solved_Puzzle_t det_hill_solution(solved_Puzzle_t &test, int iters) {
+    int n = 0;
+    for(int i = 0; i <iters; i++){
+        test = generate_neighbours_solution(test);
+        if ((n % 1) == 0) {
+            if (evaluate(test) < test.size * test.size) {
+                cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
+            }
+        }
+        if (evaluate(test) == 0) {
+            break;
+        }
+        n++;
+    }
+}
+
+
+solved_Puzzle_t rand_hill_solution(solved_Puzzle_t &test, int iters) {
+    int n = 0;
+    for(int i = 0; i <iters; i++){
+        test = generate_random_neighbours_solution(test);
+        if ((n % 1) == 0) {
+            if (evaluate(test) < test.size * test.size) {
+                cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
+            }
+        }
+        if (evaluate(test) == 0) {
+            break;
+        }
+        n++;
+    }
+}
+vector<int> empty_board_gen(int size){
+    vector<int> zero_board;
+    for (int i = 0; i < size*size; i++) {
+        zero_board.push_back(0);
+    }
+    return zero_board;
+}
+
+vector<vector<int>> argument_to_vector(string arg){
+    vector<vector<int>> placeholder;
+    vector<int> mini;
+    int z;
+    for (int i = 0; i < arg.length(); ++i) {
+        if (arg[i] != '.') {
+            if (arg[i] != ',') {
+                z = (int)arg[i] - 48;
+                mini.push_back(z);
+            }
+        } else if (arg[i] == '.') {
+            placeholder.insert(placeholder.end(), mini);
+            mini.clear();
+        }
+    }
+    placeholder.insert(placeholder.end(), mini);
+    mini.clear();
+    return placeholder;
+};
+
+
+void func(string name, int iters, solved_Puzzle_t &puzzle){
+    if(name == "brute"){
+        brute_force(puzzle);
+    } else if (name == "random"){
+        random_solution(puzzle, iters);
+    } else if (name == "hill1"){
+        det_hill_solution(puzzle, iters);
+    } else if (name == "hill2"){
+        rand_hill_solution(puzzle, iters);
+    }
+}
+
+
+int main(int argc, char **argv){
     using namespace std;
 
+    cout << "Funkcja: " << argv[1] << " Liczba Iteracji: " << argv[2] << " Dlugosc tablicy: " << argv[3] << endl;
 
-    vector<vector<int>> row_test3 = {{2},{1,1},{3}};
-    vector<vector<int>> column_test3 = {{2},{1,1},{3}};
-    vector<int> board_test3 = {1,1,1,
-                              1,0,1,
-                              1,1,0};
+    string func_name = argv[1];
+    int iterations = atoi(argv[2]);
+    int size = atoi(argv[3]);
+    string row_arr = argv[4];
+    string column_arr = argv[5];
 
-    vector<int> board_test_free_zero = {0,0,0,
-                                        0,0,0,
-                                        0,0,0};
+
+    vector<vector<int>> row_test = argument_to_vector(row_arr);
+    vector<vector<int>> column_test = argument_to_vector(column_arr) ;
+
+    vector<int> board_test = empty_board_gen(size);
+
     solved_Puzzle_t test{
-            3,
-            row_test3,
-            column_test3,
-            board_test_free_zero
+            size,
+            row_test,
+            column_test,
+            board_test
     };
 
     std::cout << test << endl;
 
+    func(func_name, iterations, test);
+
     //Sekcja Przeglądu po każdej możliwej iteracji
     //brute_force(test);
 
-
-    cout << random_solution(test) << endl;
+    //Randomowe rozwiązanie
+    //cout << random_solution(test) << endl;
 
     return 0;
 }
+
+/*
+    vector<vector<int>> row_test3 = {{2},{1,1},{3}};
+    vector<vector<int>> column_test3 = {{2},{1,1},{3}};
+    vector<int> board_test3 = {1,1,1,
+                               1,0,1,
+                               1,1,0};
+
+    vector<int> board_test_free_zero = {0,0,0,
+                                        0,0,0,
+                                        0,0,0};
+*/

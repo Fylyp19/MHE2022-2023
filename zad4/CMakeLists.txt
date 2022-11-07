@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
-project(zad3)
+project(zad4)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 14)
 
-add_executable(zad3 main.cpp brudnopis.h dodaktowe_testy.h)
+add_executable(zad4 main.cpp)

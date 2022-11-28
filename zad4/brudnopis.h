@@ -181,3 +181,46 @@ cout << sum;*/
     return (i != puzzle.board.size());
 }
  */
+
+//syfilis
+
+/*
+    if(random_point = 0){
+        if(new_board[random_point] = 0){ //0,y
+            new_board[random_point] = 1;
+            neighbours.push_back(new_board); // 1,y
+            if(new_board[random_point+1] = 0){ //
+                new_board[random_point+1] = 1;
+                neighbours.push_back(new_board); // 1,1
+                backup_board[random_point+1] = 1;
+                neighbours.push_back(new_board); // 0,1
+            } else {
+                new_board[random_point+1] = 0;
+                neighbours.push_back(new_board); // 1,0
+                backup_board[random_point+1] = 0;
+                neighbours.push_back(new_board); // 0,0
+            }
+        } else { //1,y
+            new_board[random_point] = 0;
+            neighbours.push_back(new_board); // 0,0
+            if(new_board[random_point+1] = 0){
+                new_board[random_point+1] = 1;
+                neighbours.push_back(new_board); // 1,1
+                backup_board[random_point+1] = 1;
+                neighbours.push_back(new_board); // 0,1
+            } else {
+                new_board[random_point+1] = 0;
+                neighbours.push_back(new_board); // 0,1
+                backup_board[random_point+1] = 1;
+                neighbours.push_back(new_board); // 0,1
+            }
+        }
+    } else if (random_point = p.size*p.size){
+        for(int i = 0; i < 2; i++){
+
+        }
+    } else {
+        for(int i = 0; i < 2; i++){
+
+        }
+    }*/

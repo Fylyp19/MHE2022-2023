@@ -107,6 +107,11 @@ double fitness_function(const chromosome_t &chromosome, solved_Puzzle_t puzzle){
     return /*1.0 / (1.0 + */count_correct_lines(geno, puzzle)/*)*/;
 }
 
+double fitness_function2(const chromosome_t &chromosome, solved_Puzzle_t puzzle){
+    auto geno = chromosome;
+    return 1.0 / abs((7.0 - count_correct_lines(geno, puzzle)));
+}
+
 std::vector<chromosome_t> crossover_one_point(std::vector<chromosome_t> parents, double pc) {
     using namespace std;
     uniform_int_distribution<int> locus(0,parents.at(0).size()-1);
@@ -185,7 +190,7 @@ int main(int argc, char **argv){
     int iterations = 1000;
 
     population_t population = generate_initial_population(10);
-    auto result = genetic_algorithm(test, population, fitness_function,
+    auto result = genetic_algorithm(test, population, fitness_function2,
             [&iterations, &test](auto a, auto b) {
                 static int i = 0;
                 i++;

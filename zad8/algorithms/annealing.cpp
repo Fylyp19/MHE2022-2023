@@ -5,8 +5,8 @@
 #include "../base_functions.h"
 #include "../base_for_puzzles.h"
 
-std::random_device rd;
-std::mt19937 mtt(rd());
+std::random_device rda;
+std::mt19937 mtt(rda());
 
 solved_Puzzle_t annealing(const solved_Puzzle_t &puzzle, int iterations, bool c_t, bool c_c, bool c_i, bool g,
                           bool show_progress = false,

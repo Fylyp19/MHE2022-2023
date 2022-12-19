@@ -4,47 +4,6 @@
 
 #include "base_for_puzzles.h"
 
-std::ostream &operator<<(std::ostream &o, const answer_t &puzzle){
-    using namespace std;
-    o << " " << "\t";
-
-    for (const auto & row_line : puzzle.row_lines)
-    {
-
-        for (int j = 0; j < row_line.size(); j++){
-            o << row_line[j];
-            if(j != row_line.size()-1){
-                o << ",";
-            }
-        }
-        o << "\t";
-    }
-    o << std::endl;
-
-    for (int y = 0; y < puzzle.size; y++){
-
-        for (int j = 0; j < puzzle.column_lines[y].size(); j++){
-            o << puzzle.column_lines[y][j];
-            if(j != puzzle.column_lines[y].size() - 1){
-                o << ",";
-            }
-        }
-        for (int x = 0; x < puzzle.size ; x++){
-            auto &val = puzzle.board[y*puzzle.size+x];
-            o << "\t" <<((val>0));
-        }
-        o << std::endl;
-    }
-    return o;
-}
-
-bool operator==(solved_Puzzle_t l, solved_Puzzle_t r) {
-    if (l.size != r.size) return false;
-    for (unsigned i = 0; i < r.board.size(); i++) {
-        if (l.board.at(i) != r.board.at(i)) return false;
-    }
-    return true;
-}
 
 solved_Puzzle_t solved_Puzzle_t::generate_random_solution_t() const {
     using namespace  std;
@@ -99,4 +58,46 @@ solved_Puzzle_t solved_Puzzle_t::generate_neighbor_almost_normal() const {
         }
     }
     return new_board;
+}
+
+std::ostream &operator<<(std::ostream &o, const answer_t &puzzle){
+    using namespace std;
+    o << " " << "\t";
+
+    for (const auto & row_line : puzzle.row_lines)
+    {
+
+        for (int j = 0; j < row_line.size(); j++){
+            o << row_line[j];
+            if(j != row_line.size()-1){
+                o << ",";
+            }
+        }
+        o << "\t";
+    }
+    o << std::endl;
+
+    for (int y = 0; y < puzzle.size; y++){
+
+        for (int j = 0; j < puzzle.column_lines[y].size(); j++){
+            o << puzzle.column_lines[y][j];
+            if(j != puzzle.column_lines[y].size() - 1){
+                o << ",";
+            }
+        }
+        for (int x = 0; x < puzzle.size ; x++){
+            auto &val = puzzle.board[y*puzzle.size+x];
+            o << "\t" <<((val>0));
+        }
+        o << std::endl;
+    }
+    return o;
+}
+
+bool operator==(solved_Puzzle_t l, solved_Puzzle_t r) {
+    if (l.size != r.size) return false;
+    for (unsigned i = 0; i < r.board.size(); i++) {
+        if (l.board.at(i) != r.board.at(i)) return false;
+    }
+    return true;
 }

@@ -19,6 +19,7 @@
 using namespace std;
 
 struct solved_Puzzle_t{
+
     int size; //rozmiar w pionie i poziomie
     vector<vector<int>>  row_lines; // pozioma linia decyzyjna o zaznaczeniu
     vector<vector<int>> column_lines; // pionowa linia decyzyjna o zaznaczeniu
@@ -36,7 +37,8 @@ struct solved_Puzzle_t{
 
 using answer_t = solved_Puzzle_t;
 
-ostream &operator<<(std::ostream &o, const answer_t &puzzle);
+std::ostream &operator<<(std::ostream &o, const answer_t &puzzle);
+
 bool operator==(solved_Puzzle_t l, solved_Puzzle_t r);
 
 #endif //ZAD6_BASE_FOR_PUZZLES_H

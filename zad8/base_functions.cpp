@@ -71,6 +71,7 @@ int count_incorrect_lines(solved_Puzzle_t &solutionBoard){
     return sum;
 }
 
+
 double evaluate(solved_Puzzle_t &solvedPuzzle) {
     return count_incorrect_lines( solvedPuzzle);
 }

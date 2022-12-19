@@ -13,8 +13,6 @@ solved_Puzzle_t annealing(const solved_Puzzle_t &puzzle, int iterations, bool c_
                           std::function<double(int)> T = [](int k){return 1000.0/(k+1);}) {
     int k = 0;
     int z = 0;
-    vector<double> times_vector;
-    vector<int> iterations_vector;
     clock_t start;
     double duration;
     start = clock();
@@ -24,7 +22,6 @@ solved_Puzzle_t annealing(const solved_Puzzle_t &puzzle, int iterations, bool c_
     auto best_so_far = s;
     cerr << "annealing..." << endl;
     for (; k < iterations; k++) {
-        iterations_vector.push_back(k);
         //if (show_progress == false) {
         //    cout << k << " " << evaluate(s) << " " << evaluate(best_so_far) << endl;
         //}
@@ -49,8 +46,6 @@ solved_Puzzle_t annealing(const solved_Puzzle_t &puzzle, int iterations, bool c_
             z++;
             break;
         }
-        duration = (clock() - start) / (double) CLOCKS_PER_SEC;
-        times_vector.push_back(duration);
     }
     if(c_t == true) {
         duration = (clock() - start) / (double) CLOCKS_PER_SEC;
@@ -68,10 +63,6 @@ solved_Puzzle_t annealing(const solved_Puzzle_t &puzzle, int iterations, bool c_
     }
     if(g == true){
         cout << "Wykonanie funkcji: " << z << endl;
-    }
-    if(c_c == true && c_t == true && c_i == true){
-        cout << iterations_vector.size() << " " << diagram.size() << " " << times_vector.size() << endl;
-        //draw_chart(iterations_vector,diagram,times_vector);
     }
     return best_so_far;
 }

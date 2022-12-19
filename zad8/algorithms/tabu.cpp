@@ -23,8 +23,8 @@ solved_Puzzle_t tabu_search(const solved_Puzzle_t &puzzle, int iterations, int t
         //}
         vector<solved_Puzzle_t> neighbors;
         for (auto e : tabu_list.back().generate_neighbours_t()) {
-            bool found =(std::find(tabu_list.begin(), tabu_list.end(), e) != tabu_list.end());
-            if (!found) neighbors.push_back(e);
+            //bool found =(std::find(tabu_list.begin(), tabu_list.end(), e) != tabu_list.end());
+            //if (!found) neighbors.push_back(e);
         }
         if (neighbors.size() == 0) {
             cerr << "we ate our tail :/" << endl;

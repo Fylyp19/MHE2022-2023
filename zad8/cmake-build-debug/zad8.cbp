@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="zad8"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="zad8">
+				<Option output="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/zad8.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/backward"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include-fixed"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 zad8"/>
+					<CompileFile command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="zad8/fast">
+				<Option output="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/zad8.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include/c++/backward"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/include-fixed"/>
+					<Add directory="D:/Program Files/minGW/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 zad8/fast"/>
+					<CompileFile command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/Filip/CLionProjects/zad8/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="D:/Program Files/minGW/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Filip/CLionProjects/zad8/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/annealing.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/annealing.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/brute.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/brute.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/hills.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/hills.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/random.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/random.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/tabu.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/algorithms/tabu.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/base_for_puzzles.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/base_for_puzzles.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/base_functions.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/base_functions.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/main.cpp">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/placeholder.h">
+			<Option target="zad8"/>
+		</Unit>
+		<Unit filename="C:/Users/Filip/CLionProjects/zad8/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

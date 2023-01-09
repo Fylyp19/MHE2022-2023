@@ -109,7 +109,7 @@ double fitness_function(const chromosome_t &chromosome, solved_Puzzle_t puzzle){
 
 double fitness_function2(const chromosome_t &chromosome, solved_Puzzle_t puzzle){
     auto geno = chromosome;
-    return 1.0 / abs((7.0 - count_correct_lines(geno, puzzle)));
+    return 1.0 / abs((8.0 - count_correct_lines(geno, puzzle)));
 }
 
 std::vector<chromosome_t> crossover_one_point(std::vector<chromosome_t> parents, double pc) {
@@ -160,11 +160,11 @@ chromosome_t probabilistic_mutation(const chromosome_t parent, double p_mutation
     return child;
 }
 
-std::vector<chromosome_t> generate_initial_population(int n) {
+std::vector<chromosome_t> generate_initial_population(int n, int size) {
     std::vector<chromosome_t> ret(n);
     std::uniform_int_distribution<int> uniform(0, 1);
     std::transform(ret.begin(), ret.end(), ret.begin(), [&](auto e) {
-        chromosome_t c(9);
+        chromosome_t c(size*size);
         for (int i = 0; i < c.size(); i++) c[i] = uniform(rd_generator);
         return c;
     });
@@ -187,16 +187,58 @@ int main(int argc, char **argv){
             column_test1,
             board_test1
     };
-    int iterations = 1000;
+    int iterations = 10000;
 
-    population_t population = generate_initial_population(10);
-    auto result = genetic_algorithm(test, population, fitness_function2,
-            [&iterations, &test](auto a, auto b) {
+    int size2 = 5;
+    vector<vector<int>> row_test2 = {{2,2},{2,2},{3},{1},{1}};
+    vector<vector<int>> column_test2 = {{2,1},{2},{1},{3},{4}};
+    vector<int> board_test2 = board_gen(5);
+
+    solved_Puzzle_t test2 = {
+            size2,
+            row_test2,
+            column_test2,
+            board_test2
+    };
+
+    int size3 = 4;
+    vector<vector<int>> row_test3 = {{1,2},{2},{2},{1,2}};
+    vector<vector<int>> column_test3 = {{1,1},{2},{4},{1,1}};
+    vector<int> board_test3 = board_gen(4);
+
+    solved_Puzzle_t test3 = {
+            size3,
+            row_test3,
+            column_test3,
+            board_test3
+    };
+
+    int size_ultimate = 15;
+    vector<vector<int>> row_test_ultimate = {{5,4},{7,5},{14},{14},{14},{8,4},{8,2},{4,2},{3,2},{1,5,2},{10,1},{1,1,5},{1,3},{1},{15}};
+    vector<vector<int>> column_test_ultimate = {{5},{5,1,1},{6,1,1},{13,1},{9,1,1,1},{13,1},{8,3,1},{7,3,1},{6,3,1},{3,3,1},{4,1},{6,1},{6,1},{6,1},{10,1},{11,1}};
+    vector<int> board_test_ultimate = board_gen(15);
+
+    solved_Puzzle_t test_ultima = {
+            size_ultimate,
+            row_test_ultimate,
+            column_test_ultimate,
+            board_test_ultimate
+    };
+
+    int row_size = 5;
+    int col_size = 4;
+    vector<vector<int>> row
+
+
+
+    population_t population = generate_initial_population(10, size2);
+    auto result = genetic_algorithm(test2, population, fitness_function,
+            [&iterations, &test2](auto a, auto b) {
                 static int i = 0;
                 i++;
                 cout << i << ": ";
                 for(int i = 0; i < a.size(); i++){
-                    cout << " " << fitness_function(a[i], test) << " ";
+                    cout << " " << fitness_function(a[i], test2) << " ";
                 }
                 cout << endl;
                 return i >= iterations;
@@ -205,8 +247,8 @@ int main(int argc, char **argv){
 
     for(int i = 0; i < result.size(); i++){
         test.board = result[i];
-        cout << test << endl;
-        count_incorrect_lines(test);
+        cout << test2 << endl;
+        count_incorrect_lines(test2);
     }
 
 

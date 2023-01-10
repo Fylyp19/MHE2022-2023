@@ -21,16 +21,15 @@ std::ostream &operator<<(std::ostream &o, const answer_t &puzzle){
     }
     o << std::endl;
 
-    for (int y = 0; y < puzzle.size; y++){
-
+    for (int y = 0; y < puzzle.size_column; y++){
         for (int j = 0; j < puzzle.column_lines[y].size(); j++){
             o << puzzle.column_lines[y][j];
             if(j != puzzle.column_lines[y].size() - 1){
                 o << ",";
             }
         }
-        for (int x = 0; x < puzzle.size ; x++){
-            auto &val = puzzle.board[y*puzzle.size+x];
+        for (int x = 0; x < puzzle.size_row ; x++){
+            auto &val = puzzle.board[y*puzzle.size_row+x];
             o << "\t" <<((val>0));
         }
         o << std::endl;
@@ -68,7 +67,7 @@ solved_Puzzle_t solved_Puzzle_t::generate_random_solution_t() const {
 std::vector<solved_Puzzle_t> solved_Puzzle_t::generate_neighbours_t() const {
     const solved_Puzzle_t &p = *this;
     std::vector<solved_Puzzle_t> neighbours;
-    int board_size = p.size*p.size;
+    int board_size = p.size_column*p.size_row;
     for(int i = 0; i < board_size; i++){
         if(p.board[i] == 0){
             auto new_board = p;

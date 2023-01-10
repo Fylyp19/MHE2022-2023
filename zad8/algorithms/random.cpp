@@ -16,7 +16,7 @@ void random_solution(solved_Puzzle_t &test, int iters, bool c_t, bool c_c, bool 
         diagram.push_back(evaluate(test));
         test = generate_random_solution(test);
         if ((n % 1) == 0) {
-            if (evaluate(test) < test.size * test.size) {
+            if (evaluate(test) < test.size_column * test.size_row) {
                 cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
                 z++;
             }

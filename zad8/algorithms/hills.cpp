@@ -8,7 +8,7 @@
 vector<vector<int>> generate_neighbours(solved_Puzzle_t &p){
     vector<vector<int>> neighbours;
     auto backup_board = p.board;
-    int board_size = p.size*p.size;
+    int board_size = p.size_row*p.size_column;
     vector<int> new_board = backup_board;
     for(int i = 0; i < board_size; i++){
         if(new_board[i] == 0){
@@ -68,7 +68,7 @@ void det_hill_solution(solved_Puzzle_t &test, int iters, bool c_t, bool c_c, boo
     for(int i = 0; i <iters; i++){
         test = generate_neighbours_solution(test);
         if ((n % 1) == 0) {
-            if (evaluate(test) < test.size * test.size) {
+            if (evaluate(test) < test.size_row * test.size_column) {
                 cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
                 z++;
             }
@@ -117,7 +117,7 @@ void rand_hill_solution(solved_Puzzle_t &test, int iters, bool c_t, bool c_c, bo
     for(int i = 0; i <iters; i++){
         test = generate_random_neighbours_solution(test);
         if ((n % 1) == 0) {
-            if (evaluate(test) < test.size * test.size) {
+            if (evaluate(test) < test.size_row * test.size_column) {
                 cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
                 z++;
             }

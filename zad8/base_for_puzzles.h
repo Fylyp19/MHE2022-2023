@@ -19,7 +19,8 @@
 using namespace std;
 
 struct solved_Puzzle_t{
-    int size; //rozmiar w pionie i poziomie
+    int size_row; //rozmiar w pionie i poziomie
+    int size_column;
     vector<vector<int>>  row_lines; // pozioma linia decyzyjna o zaznaczeniu
     vector<vector<int>> column_lines; // pionowa linia decyzyjna o zaznaczeniu
     vector<int> board; // tablica na której weryfikujemy rozwiązanie

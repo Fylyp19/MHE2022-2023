@@ -12,16 +12,16 @@ void brute_force(solved_Puzzle_t &test, bool c_t, bool c_c, bool a, bool q, bool
     int n = 0;
     int z = 0;
     vector<int> diagram;
-    int x = pow(2,test.size*test.size)-1;
+    int x = pow(2,test.size_row*test.size_column)-1;
     for(; x >= 1; x--) {
         test.board.clear();
         auto newBoard = convert(x);
-        while (newBoard.size() != test.size * test.size) {
+        while (newBoard.size() != test.size_row * test.size_column) {
             newBoard.insert(newBoard.begin(), 0);
         };
         test.board = newBoard;
         if ((n % 1) == 0) {
-            if (evaluate(test) < test.size * test.size) {
+            if (evaluate(test) < test.size_row * test.size_column) {
                 cout << n << " : zle linijki-" << evaluate(test) << endl << test << endl;
                 z++;
             }

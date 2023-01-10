@@ -68,35 +68,33 @@ population_t genetic_algorithm(solved_Puzzle_t puzzle,
     return population;
 };
 
-vector<int> reverse_geno(vector<int> geno){
-    int geno_size = sqrt(geno.size());
+vector<int> reverse_geno(vector<int> board, solved_Puzzle_t &test){
     vector<int> reverse_board;
-    for(int i=0; i < geno_size; i++){
-        for(int j=0; j < pow(geno_size,2); j+=geno_size) {
-            reverse_board.push_back(geno[i + j]);
+    for(int i=0; i < test.size_row; i++){
+        for(int j=0; j < test.size_row*test.size_column; j+=test.size_row){
+            reverse_board.push_back(test.board[i+j]);
         }
     }
     return reverse_board;
 }
-void print_vector_for_ga(vector<int> a){
-    for(int i: a){
-        cout << i;
-    }
-    cout << " ";
-}
+
+
 
 double count_correct_lines(vector<int> board, solved_Puzzle_t puzzle){
     using namespace std;
     int sum = 0;
-    auto reversed_board = reverse_geno(board);
-    vector<vector<int>> column_line = board_to_vector(puzzle.size, board);
-    vector<vector<int>> row_line = board_to_vector(puzzle.size, reversed_board);
-    for(int i = 0; i < puzzle.size; i++){
-        if(puzzle.row_lines[i] == row_line[i]){
-            sum+=1;
+    int full_size = puzzle.size_row * puzzle.size_column;
+    auto reversed_board = reverse_geno(board, puzzle);
+    vector<vector<int>> column_line = board_to_vector(puzzle.size_row, board);
+    vector<vector<int>> row_line = board_to_vector(puzzle.size_column, reversed_board);
+    for(int i = 0; i < puzzle.size_row; i++) {
+        if (puzzle.row_lines[i] == row_line[i]) {
+            sum += 1;
         }
-        if(puzzle.column_lines[i] == column_line[i]){
-            sum+=1;
+    }
+    for(int i = 0; i < puzzle.size_column; i++){
+        if (puzzle.column_lines[i] == column_line[i]) {
+            sum += 1;
         }
     }
     return sum;
@@ -104,13 +102,14 @@ double count_correct_lines(vector<int> board, solved_Puzzle_t puzzle){
 
 double fitness_function(const chromosome_t &chromosome, solved_Puzzle_t puzzle){
     auto geno = chromosome;
-    return /*1.0 / (1.0 + */count_correct_lines(geno, puzzle)/*)*/;
+    return count_correct_lines(geno, puzzle);
 }
 
-double fitness_function2(const chromosome_t &chromosome, solved_Puzzle_t puzzle){
+double fitness_function2(const chromosome_t &chromosome, solved_Puzzle_t puzzle) {
     auto geno = chromosome;
-    return 1.0 / abs((8.0 - count_correct_lines(geno, puzzle)));
+    return 1.0 / abs((puzzle.size_row+puzzle.size_column - count_correct_lines(geno, puzzle)));
 }
+
 
 std::vector<chromosome_t> crossover_one_point(std::vector<chromosome_t> parents, double pc) {
     using namespace std;
@@ -129,7 +128,6 @@ int selection_roulette(std::vector<double> fitnesses) {
     for(int i = 0; i < fitnesses.size(); i++){
         sum_of_f += fitnesses[i];
     }
-    //cout << sum_of_f << endl;
     std::uniform_int_distribution<int> uniform(0, sum_of_f);
     double a = uniform(rd_generator);
     double offset_down;
@@ -164,7 +162,7 @@ std::vector<chromosome_t> generate_initial_population(int n, int size) {
     std::vector<chromosome_t> ret(n);
     std::uniform_int_distribution<int> uniform(0, 1);
     std::transform(ret.begin(), ret.end(), ret.begin(), [&](auto e) {
-        chromosome_t c(size*size);
+        chromosome_t c(size);
         for (int i = 0; i < c.size(); i++) c[i] = uniform(rd_generator);
         return c;
     });
@@ -176,69 +174,53 @@ std::vector<chromosome_t> generate_initial_population(int n, int size) {
 int main(int argc, char **argv){
     using namespace std;
 
-    int size1 = 3;
-    vector<vector<int>> row_test1 = {{2},{1,1},{3}};
-    vector<vector<int>> column_test1 = {{2},{1,1},{3}};
-    vector<int> board_test1 = board_gen(3);
+    //int size1 = 5;
+    //int size2 = 4;
+    //vector<vector<int>> row_test1 = {{2},{1},{2},{1},{2}};
+    //vector<vector<int>> column_test1 = {{1},{3},{3},{1}};
+    //vector<int> board_test1 = board_gen(size1,size2);
+    //vector<int> board_test1 = {1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,0,0,0,0,1};
+
+    //int size1 = 3;
+    //int size2 = 3;
+    //vector<vector<int>> row_test1 = {{2},{1,1},{3}};
+    //vector<vector<int>> column_test1 = {{2},{1,1},{3}};
+    //vector<int> board_test1 = board_gen(3,3);
+
+    int row_size = atoi(argv[1]);
+    int column_size = atoi(argv[2]);
+    string row_arr = argv[3];
+    string column_arr = argv[4];
+    int iterations = atoi(argv[5]);
+    vector<int> board_placeholder = board_gen(row_size,column_size);
+
+    vector<vector<int>> row_test = argument_to_vector(row_arr);
+    vector<vector<int>> column_test = argument_to_vector(column_arr) ;
 
     solved_Puzzle_t test = {
-            size1,
-            row_test1,
-            column_test1,
-            board_test1
-    };
-    int iterations = 10000;
-
-    int size2 = 5;
-    vector<vector<int>> row_test2 = {{2,2},{2,2},{3},{1},{1}};
-    vector<vector<int>> column_test2 = {{2,1},{2},{1},{3},{4}};
-    vector<int> board_test2 = board_gen(5);
-
-    solved_Puzzle_t test2 = {
-            size2,
-            row_test2,
-            column_test2,
-            board_test2
+            row_size,
+            column_size,
+            row_test,
+            column_test,
+            board_placeholder
     };
 
-    int size3 = 4;
-    vector<vector<int>> row_test3 = {{1,2},{2},{2},{1,2}};
-    vector<vector<int>> column_test3 = {{1,1},{2},{4},{1,1}};
-    vector<int> board_test3 = board_gen(4);
-
-    solved_Puzzle_t test3 = {
-            size3,
-            row_test3,
-            column_test3,
-            board_test3
-    };
-
-    int size_ultimate = 15;
-    vector<vector<int>> row_test_ultimate = {{5,4},{7,5},{14},{14},{14},{8,4},{8,2},{4,2},{3,2},{1,5,2},{10,1},{1,1,5},{1,3},{1},{15}};
-    vector<vector<int>> column_test_ultimate = {{5},{5,1,1},{6,1,1},{13,1},{9,1,1,1},{13,1},{8,3,1},{7,3,1},{6,3,1},{3,3,1},{4,1},{6,1},{6,1},{6,1},{10,1},{11,1}};
-    vector<int> board_test_ultimate = board_gen(15);
-
-    solved_Puzzle_t test_ultima = {
-            size_ultimate,
-            row_test_ultimate,
-            column_test_ultimate,
-            board_test_ultimate
-    };
-
-    int row_size = 5;
-    int col_size = 4;
-    vector<vector<int>> row
-
-
-
-    population_t population = generate_initial_population(10, size2);
-    auto result = genetic_algorithm(test2, population, fitness_function,
-            [&iterations, &test2](auto a, auto b) {
+    //solved_Puzzle_t test2 = {
+    //        size1,
+    //        size2,
+    //        row_test1,
+    //        column_test1,
+    //        board_test1
+    //};
+    cout << test << endl;
+    population_t population = generate_initial_population(10, board_placeholder.size());
+    auto result = genetic_algorithm(test, population, fitness_function2,
+            [&iterations, &test](auto a, auto b) {
                 static int i = 0;
                 i++;
                 cout << i << ": ";
                 for(int i = 0; i < a.size(); i++){
-                    cout << " " << fitness_function(a[i], test2) << " ";
+                    cout << " " << fitness_function(a[i], test) << " ";
                 }
                 cout << endl;
                 return i >= iterations;
@@ -247,10 +229,8 @@ int main(int argc, char **argv){
 
     for(int i = 0; i < result.size(); i++){
         test.board = result[i];
-        cout << test2 << endl;
-        count_incorrect_lines(test2);
+        cout << test << endl;
     }
-
-
     return 0;
+
 }

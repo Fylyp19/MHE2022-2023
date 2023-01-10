@@ -14,6 +14,7 @@ double evaluate(solved_Puzzle_t &solvedPuzzle);
 vector<int> convert(int x);
 solved_Puzzle_t generate_random_solution(const solved_Puzzle_t &p);
 vector<vector<int>> argument_to_vector(string arg);
-vector<int> board_gen(int size);
+vector<int> board_gen(int size1, int size2);
 void draw_chart(vector<int> iters, vector<int> grades, vector<double> times);
+vector<int> alternative_reverse_board(vector<int> board, solved_Puzzle_t &test);
 #endif //ZAD6_BASE_FUNCTIONS_H
